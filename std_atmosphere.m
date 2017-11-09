@@ -17,7 +17,7 @@ function [ rho, p,nu, a, t] = std_atmosphere( altitude_m,vel_ms)
 
 
 GAMMA = 1.4; % or replace with handle if we are not using constant
-R_AIR = 0.2869; %kj/kg.K
+R_AIR = 286.9; %j/kg.K
 
 p = 0;
 t = 0;
