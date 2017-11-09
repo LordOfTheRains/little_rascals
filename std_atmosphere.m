@@ -35,7 +35,7 @@ elseif altitude < 91000
     t = 186.8673;
     p = exp(2.156582e-06*altitude^3 -4.836957e-04*altitude^2-0.2609971*altitude + 13.47530);
     rho = exp(-3.322622e-06*altitude^3 +9.111460e-04*altitude^2-0.1425192*altitude + 5.944694);
-elseif altitude < 100000 
+elseif altitude < 100001
     delta_z = altitude - 91000;
     little_a = -19942.9;
     t = 263.1905-76*sqrt(1-((delta_z/little_a)^2));
