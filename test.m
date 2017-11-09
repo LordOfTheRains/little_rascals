@@ -16,13 +16,13 @@ end
 
 
 figure(1)
-plot(altitude,p);
+plot(p,altitude);
 xlabel('Altitude (m)');
 ylabel('Pressure (pa)');
 title('Pressure VS Altitude');
 
 figure(2)
-plot(altitude,t);
-xlabel('Altitude (m)');
-ylabel('Temperature (K)');
-title('Altitude VS Temperature');
+plot(t,altitude);
+xlabel('Temperature (K)');
+ylabel('Altitude (m)');
+title('Temperature VS Altitude');
