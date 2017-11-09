@@ -1,4 +1,4 @@
 clc
 clear
-
-[ density, pressure,nu, a, temperature] = std_atmosphere( 500, 1)
+altitude = 90000;
+[ density, pressure,nu, a, temperature] = std_atmosphere( altitude,1);
