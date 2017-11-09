@@ -1,4 +1,4 @@
-function [ rho, p,nu, a, t] = std_atmosphere( altitude,vel_ms)
+function [ rho, p,nu, a, t] = std_atmosphere( altitude)
 %UNTITLED Summary of this function goes here
 % Since there is no class today, you will have an extended group lab session.  
 % Each group must have a function and accurate Matlab code that calculates 
@@ -15,9 +15,6 @@ function [ rho, p,nu, a, t] = std_atmosphere( altitude,vel_ms)
 % a
 % t - kelvin
 
-
-%  [ rho, p,nu, a, t] = std_atmosphere( altitude_m,model_num)
-% uni: 0 is the meter, 1 = ft 
 
 
 GAMMA = 1.4; % or replace with handle if we are not using constant
