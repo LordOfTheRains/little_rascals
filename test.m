@@ -17,8 +17,8 @@ end
 
 figure(1)
 plot(p,altitude);
-xlabel('Altitude (m)');
-ylabel('Pressure (pa)');
+xlabel('Pressure (pa)');
+ylabel('Altitude (m)');
 title('Pressure VS Altitude');
 
 figure(2)
