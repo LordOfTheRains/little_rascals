@@ -1,13 +1,13 @@
 function [ rho, p,nu, a, t] = std_atmosphere(altitude)
 %UNTITLED Summary of this function goes here
-% Since there is no class today, you will have an extended group lab session.  
-% Each group must have a function and accurate Matlab code that calculates 
-% the standard atmosphere from sea level to 100km altitude.  
-% You must calculate density, pressure, kinematic viscosity, speed of sound, 
-% and temperature.  Each group must have a functional routine, not each person. 
-% Submit to me via e-mail and I will run it tonight.  
-% If it runs and is accurate, full credit.  If it runs but not accurate, half credit.  
-% If it doesn't run, then I will wad up your printout and set it on fire. 
+% Since there is no class today, you will have an extended group lab session.
+% Each group must have a function and accurate Matlab code that calculates
+% the standard atmosphere from sea level to 100km altitude.
+% You must calculate density, pressure, kinematic viscosity, speed of sound,
+% and temperature.  Each group must have a functional routine, not each person.
+% Submit to me via e-mail and I will run it tonight.
+% If it runs and is accurate, full credit.  If it runs but not accurate, half credit.
+% If it doesn't run, then I will wad up your printout and set it on fire.
 % 10 points for each accurate condition mentioned above (50 points total)
 % rho
 % p
@@ -31,7 +31,7 @@ if altitude < 86000 %Troposphere
     [rho,a,t,p,nu,ZorH]=stdatmo(altitude,0,'si');
     return
 % do some stuff here for altitude abvoe 86km
-elseif altitude < 91000 
+elseif altitude < 91000
     altitude = altitude/1000; %Equations are for z in km
     t = 186.8673;
     p = exp(2.156582e-06*altitude^3 -4.836957e-04*altitude^2-0.1425192*altitude + 13.47530);
@@ -39,7 +39,7 @@ elseif altitude < 91000
     mu = mu_0_earth*((t/earth_t0)^1.5)*((earth_t0+earth_ts)/(t+earth_ts));
 elseif altitude < 100001
     altitude = altitude/1000; %Equations are for z in km
-    delta_z = altitude - 91000;
+    delta_z = altitude - 91;
     little_a = -19942.9;
     t = 263.1905-76.3232*sqrt(1-((delta_z/little_a)^2));
     p = exp(3.304895e-05*altitude^3 -0.009062730e-04*altitude^2+0.6516698*altitude - 11.03037);
@@ -57,4 +57,3 @@ a = sqrt(GAMMA*R_AIR*t);
 
 
 end
-
