@@ -1,5 +1,5 @@
-function [rho_scale, t_scale rho, p, nu, a, t] = std_atmosphere(altitude)
-%UNTITLED Summary of this function goes here
+function [rho_scale, t_scale rho, p, nu, a, t] = std_atmosphere(altitude_m)
+% Summary of this function goes here
 % Since there is no class today, you will have an extended group lab session.
 % Each group must have a function and accurate Matlab code that calculates
 % the standard atmosphere from sea level to 100km altitude.
@@ -37,21 +37,29 @@ mu = 0;
 
 %Performing scaled rho calc befor altitude unit c
 h_s = (R_u*t_avg)/(mw*g); %Scale Height
-rho_scale = rho_0*exp(-altitude/h_s); %Scaled rho
-t_scale = t_0*(exp(-altitude/h_s)); %scaled Temp
-if altitude < 86000 %Troposphere
-    [rho,a,t,p,nu,ZorH]=stdatmo(altitude,0,'si');
+rho_scale = rho_0*exp(-altitude_m/h_s); %Scaled rho
+t_scale = t_0*(exp(-altitude_m/h_s)); %scaled Temp
+
+
+%not using this for now since having issue preserving precision in handle.
+P_COEFF = [0.000000 2.156582e-06 -4.836957e-04 -0.1425192 13.47530;%86-91km
+           0.000000 3.304895e-05 -0.009062730e-04 0.6516698 -11.03037];%91-100km
+above_86km_base_eq = @(A,B,C,D,E,Z) exp(A*Z^4+B*Z^3+C*Z^2+D*Z+E);
+altitude = altitude_m/1000;%Equations are for z in km for above 86km
+if altitude_m < 86000 %Troposphere
+    [rho,a,t,p,nu,ZorH]=stdatmo(altitude_m,0,'si');
     return
 % do some stuff here for altitude abvoe 86km
-elseif altitude < 91000
-    altitude = altitude/1000; %Equations are for z in km
+elseif altitude_m < 91000
     t = 186.8673;
-    p = exp(2.156582e-06*altitude^3 -4.836957e-04*altitude^2-0.1425192*altitude + 13.47530);
+    %p = above_86km_base_eq(P_COEFF(1,1),P_COEFF(1,2),...
+    %                      P_COEFF(1,3),P_COEFF(1,4),...
+    %                       P_COEFF(1,5),altitude);
+    p = exp(2.156582e-06*altitude^3-4.836957e-04*altitude^2*-0.1425192*altitude + 13.47530);
     rho = exp(-3.322622e-06*altitude^3 +9.111460e-04*altitude^2-0.1425192*altitude + 5.944694);
     mu = mu_0_earth*((t/earth_t0)^1.5)*((earth_t0+earth_ts)/(t+earth_ts));
-elseif altitude < 100001
-    altitude = altitude/1000; %Equations are for z in km
-    delta_z = altitude - 91000;
+elseif altitude_m < 100001
+    delta_z = altitude - 91;
     little_a = -19942.9;
     t = 263.1905-76.3232*sqrt(1-((delta_z/little_a)^2));
     p = exp(3.304895e-05*altitude^3 -0.009062730e-04*altitude^2+0.6516698*altitude - 11.03037);
