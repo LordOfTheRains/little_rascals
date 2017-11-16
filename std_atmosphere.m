@@ -27,6 +27,7 @@ g = 9.81; %Gravity m/s^2
 mw = .02897; %Mean Molecular Weight
 t_avg = 257.5; %Average atmospheric temperature
 rho_0  = 1.225; %kg.m^3; is the base density
+t_0 = 288.7; %Sea Level temperature Kelvin
 
 p = 0;
 t = 0;
@@ -37,7 +38,7 @@ mu = 0;
 %Performing scaled rho calc befor altitude unit c
 h_s = (R_u*t_avg)/(mw*g); %Scale Height
 rho_scale = rho_0*exp(-altitude/h_s); %Scaled rho
-t_scale = t_avg*(exp(-altitude/h_s)); %scaled Temp
+t_scale = t_0*(exp(-altitude/h_s)); %scaled Temp
 if altitude < 86000 %Troposphere
     [rho,a,t,p,nu,ZorH]=stdatmo(altitude,0,'si');
     return
