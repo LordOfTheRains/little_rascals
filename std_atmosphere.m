@@ -16,12 +16,15 @@ function [ rho, p,nu, a, t] = std_atmosphere(altitude)
 % t - kelvin
 
 
-
+            %CONSTANTS
 GAMMA = 1.4; % or replace with handle if we are not using constant
 R_AIR = 286.9; %j/kg.K
 mu_0_earth = 0.000017332654; %Pa.s
 earth_t0 = 288.11; %K
 earth_ts = 110.33; %K
+R_u = 8.314; %Universal gas constant
+g = 9.81; %Gravity m/s^2
+Re = 6378; %
 
 p = 0;
 t = 0;
@@ -49,7 +52,11 @@ else %out of bound just give them error
     disp('we do not support data outside of 100km');
 end
 
-%little_rascals
+beta = (0.5*rho*V)/a_d;
+
+h_s = (R_u*t)/(m*g);
+H_t = h_s * ln((exp(altitude/h_s))-...
+(((sqrt(mu*Re))/(h_s*beta))rho*(t-to); %Density Scale Height
 
 nu = mu/rho;
 a = sqrt(GAMMA*R_AIR*t);
