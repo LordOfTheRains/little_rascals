@@ -1,13 +1,13 @@
-function [ rho, p,nu, a, t] = std_atmosphere(altitude)
+function [rho_scale, t_scale rho, p, nu, a, t] = std_atmosphere(altitude)
 %UNTITLED Summary of this function goes here
-% Since there is no class today, you will have an extended group lab session.  
-% Each group must have a function and accurate Matlab code that calculates 
-% the standard atmosphere from sea level to 100km altitude.  
-% You must calculate density, pressure, kinematic viscosity, speed of sound, 
-% and temperature.  Each group must have a functional routine, not each person. 
-% Submit to me via e-mail and I will run it tonight.  
-% If it runs and is accurate, full credit.  If it runs but not accurate, half credit.  
-% If it doesn't run, then I will wad up your printout and set it on fire. 
+% Since there is no class today, you will have an extended group lab session.
+% Each group must have a function and accurate Matlab code that calculates
+% the standard atmosphere from sea level to 100km altitude.
+% You must calculate density, pressure, kinematic viscosity, speed of sound,
+% and temperature.  Each group must have a functional routine, not each person.
+% Submit to me via e-mail and I will run it tonight.
+% If it runs and is accurate, full credit.  If it runs but not accurate, half credit.
+% If it doesn't run, then I will wad up your printout and set it on fire.
 % 10 points for each accurate condition mentioned above (50 points total)
 % rho
 % p
@@ -24,17 +24,25 @@ earth_t0 = 288.11; %K
 earth_ts = 110.33; %K
 R_u = 8.314; %Universal gas constant
 g = 9.81; %Gravity m/s^2
-Re = 6378; %
+mw = .02897; %Mean Molecular Weight
+t_avg = 257.5; %Average atmospheric temperature
+rho_0  = 1.225; %kg.m^3; is the base density
 
 p = 0;
 t = 0;
 mu = 0;
 
+
+
+%Performing scaled rho calc befor altitude unit c
+h_s = (R_u*t_avg)/(mw*g); %Scale Height
+rho_scale = rho_0*exp(-altitude/h_s); %Scaled rho
+t_scale = t_avg*(exp(-altitude/h_s)); %scaled Temp
 if altitude < 86000 %Troposphere
     [rho,a,t,p,nu,ZorH]=stdatmo(altitude,0,'si');
     return
 % do some stuff here for altitude abvoe 86km
-elseif altitude < 91000 
+elseif altitude < 91000
     altitude = altitude/1000; %Equations are for z in km
     t = 186.8673;
     p = exp(2.156582e-06*altitude^3 -4.836957e-04*altitude^2-0.1425192*altitude + 13.47530);
@@ -52,16 +60,7 @@ else %out of bound just give them error
     disp('we do not support data outside of 100km');
 end
 
-beta = (0.5*rho*V)/a_d;
-
-h_s = (R_u*t)/(m*g);
-H_t = h_s * ln((exp(altitude/h_s))-...
-(((sqrt(mu*Re))/(h_s*beta))rho*(t-to); %Density Scale Height
 
 nu = mu/rho;
 a = sqrt(GAMMA*R_AIR*t);
-
-
-
 end
-
