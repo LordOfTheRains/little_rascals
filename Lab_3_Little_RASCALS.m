@@ -26,7 +26,7 @@ r_apo = 306000; %meters
 r_peri = 185000; %meters
 mass = 15000; %kilograms
 diameter = 4.5; %meters
-CD = 1;
+CD = .5;
 area = (pi*diameter^2)/4;
 
 
