@@ -26,7 +26,7 @@ r_apo = 306000; %meters
 r_peri = 185000; %meters
 mass = 15000; %kilograms
 diameter = 4.5; %meters
-CD = .5;
+CD = 1;
 area = (pi*diameter^2)/4;
 
 
@@ -36,7 +36,7 @@ area = (pi*diameter^2)/4;
 %% Part 3----------------------------------------------------------------------
 alt_circ = 306000; %initial circular height meters
 alt_crit = 120000; %critical alt given in class meters
-delta_t = 3600; %1 hour time step since it will take a while
+delta_t = 36000; %Resolution for time step
 [t_step, tcrit, H_t] = circOrbitDecay(alt_circ,delta_t,alt_crit,mass,CD,area);
 figure
 plot(t_step,H_t)
@@ -44,3 +44,5 @@ title('Altitude vs Time')
 xlabel('Time (seconds)')
 ylabel('Altitude')
 ylim([0 360000]);
+fprintf('The time to decay is %.2f', tcrit/(3600*24*365))
+fprintf(' years \n')
