@@ -1,15 +1,12 @@
 clc
 clear
-altitude = 90000;
-[ density, pressure,nu, a, temperature] = std_atmosphere( altitude,1);
-
 
 
 p = [];
 t = [];
 altitude =  0:100:100000;
 for alt = altitude
-    [density, pressure,nu, a, temperature] = std_atmosphere( alt,1);
+    [rho_scale, t_scale, density, pressure, nu, a, temperature] = std_atmosphere(alt);
     p(end+1) = pressure;
     t(end+1) = temperature;
 end
