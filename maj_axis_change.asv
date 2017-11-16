@@ -27,7 +27,7 @@ mw = .02897; %Mean Molecular Weight
 t_avg = 257.5; %Average atmospheric temperature
 h_s = (R_u*t_avg)/(mw*g); %Scale Height
 h_inital = a_i-r_earth;
-dhdt = @(t,h)-sqrt(mu(h+r_earth))/ballistic_coe*rho_0*exp(-h/h_s)*t;
+dhdt = @(th)-sqrt(mu(h+r_earth))/ballistic_coe*rho_0*exp(-h/h_s);
 int_limit = linspace(0,delta_t, t_step);
 [t, h]= ode45(dhdt,int_limit, h_inital);
 
