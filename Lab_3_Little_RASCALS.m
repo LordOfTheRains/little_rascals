@@ -2,6 +2,19 @@ clear all
 clc
 
 
+% Part 2-----------------------------------------------------------------------
+r_apo = 306000; %meters
+r_peri = 185000; %meters
+mass = 15000; %kilograms
+diameter = 4.5; %meters
+CD = .5;
+area = (pi*diameter^2)/4;
+%not sure what rho is.
+[a_delta] = maj_axis_change(r_apo, r_peri, mass, CD, area, 0.0);
+
+
+
+
 % Part 1-----------------------------------------------------------------------
 alt = linspace(0,100000,5e5);
 density = [];
@@ -21,15 +34,6 @@ title('Altitude vs Temperature')
 ylabel('Altitude (meters)')
 xlabel('Temperature (kelvin)')
 
-% Part 2-----------------------------------------------------------------------
-r_apo = 306000; %meters
-r_peri = 185000; %meters
-mass = 15000; %kilograms
-diameter = 4.5; %meters
-CD = .5;
-area = (pi*diameter^2)/4;
-%not sure what rho is.
-[a_delta] = maj_axis_change(r_apo, r_peri, mass, CD, area, 0.0);
 
 %% Part 3----------------------------------------------------------------------
 alt_circ = 185000; %initial circular height meters
