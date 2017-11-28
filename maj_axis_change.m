@@ -1,4 +1,4 @@
-function [ a_delta ] = maj_axis_change(r_apo, r_per, M, CD, A, rho, delta_t, t_step )
+function [ a_delta ] = maj_axis_change(c, r_per, M, CD, A, rho )
 %maj_axis_change calculates the change in major axis with respect to time 
 %% constants 
 r_earth = 6378000;   % m
@@ -28,8 +28,24 @@ t_avg = 257.5; %Average atmospheric temperature
 h_s = (R_u*t_avg)/(mw*g); %Scale Height
 h_inital = a_i-r_earth;
 dhdt = @(t,h)-sqrt(mu(h+r_earth))/ballistic_coe*rho_0*exp(-h/h_s)*t;
-int_limit = linspace(0,delta_t, t_step);
-[t, h]= ode45(dhdt,int_limit, h_inital);
+
+period = @(semi_major)2*pi*sqrt(semi_major^3/mu);
+a =[];
+
+apogee = r_apo;
+perigee = r_per;
+height = h_inital
+t_i = 0;
+t_f = 0;
+% initial eval at apo, so the height is the height at perigee
+while r_apo > r_per
+    semi_major_axis = (perigee+apogee)/2;
+    half_period = 0.5*(period(semi_major_axis));
+    t_f = t_f + half_period;
+    height = int( -sqrt(mu(height+r_earth))/ballistic_coe*rho_0*exp(-height/h_s)*t,t_i,t_f);
+    t_i = t_f;
+    
+end
 
 a =[];
 for i = 1:length(h)
