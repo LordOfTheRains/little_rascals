@@ -32,7 +32,7 @@ area = (pi*diameter^2)/4;
 [a_delta] = maj_axis_change(r_apo, r_peri, mass, CD, area, 0.0);
 
 %% Part 3----------------------------------------------------------------------
-alt_circ = 306000; %initial circular height meters
+alt_circ = 185000; %initial circular height meters
 alt_crit = 120000; %critical alt given in class meters
 delta_t = 36000; %Resolution for time step
 [t_step, tcrit, H_t] = circOrbitDecay(alt_circ,delta_t,alt_crit,mass,CD,area);
