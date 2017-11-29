@@ -1,10 +1,11 @@
-clear all
+
 clc
 
 
 % Part 2-----------------------------------------------------------------------
-r_apo = 306000; %meters
-r_peri = 185000; %meters
+r_earth = 6378000
+r_apo = 306000 + r_earth; %meters
+r_peri = 185000 + r_earth; %meters
 mass = 15000; %kilograms
 diameter = 4.5; %meters
 CD = .5;
