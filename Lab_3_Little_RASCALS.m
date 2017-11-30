@@ -1,9 +1,9 @@
-
+clear all
 clc
 
 
 % Part 2-----------------------------------------------------------------------
-r_earth = 6378000
+r_earth = 6378000;
 r_apo = 306000 + r_earth; %meters
 r_peri = 185000 + r_earth; %meters
 mass = 15000; %kilograms
