@@ -1,11 +1,14 @@
-function [ a_delta ] = maj_axis_change(r_apo, r_per, M, CD, A, rho )
+function [ a_delta, t_span,orbits] = maj_axis_change(r_apo, r_per, M, CD, A )
 %maj_axis_change calculates the change in major axis with respect to time 
 %% constants 
 r_earth = 6378000;   % m
 mu = 3.986004418e14; % m^3/s^2
 
-%% ballistic_coe calculation  
-ballistic_coe = M/(CD*A);
+%difference between apogee and perigee to determine if oorbit is
+%circularized (meters)
+cir_orbit_tolerance = 100;
+% ballistic_coe calculation  
+% ballistic_coe = M/(CD*A);
 
 %% final semi major axis calculation by integrating da/dt equation
 %a_f = 3/2*(-rho/ballistic_coe*sqrt(mu)*t)^(2/3);
@@ -40,8 +43,9 @@ a(end+1) = semi_major_axis;
 t(end+1) = 0;
 % initial eval at apo, so the  height is the height at perigee
 num_pass = 0;
-while h_inital ~= 175000 ;
-%     disp(semi_major_axis);
+disp('orbit decaying.....');
+while apogee-perigee >= cir_orbit_tolerance ;
+    %disp(semi_major_axis);
     t(end+1) = t(end)+half_period;
     dh_per = dhdt(half_period, h_inital);
     perigee = perigee + dh_per;
@@ -61,7 +65,10 @@ while h_inital ~= 175000 ;
     
 end
 a_delta = a;
+t_span = t;
+orbits = num_pass;
 
+%{
 disp('orbits passed:');
 disp(num_pass);
 plot(t,a)
@@ -69,7 +76,7 @@ title('Semi Major Axis vs Time ')
 ylabel('semi_major_axis (meters)')
 xlabel('Time (s)')
 figure
-
+%}
 
 
 end

@@ -1,3 +1,5 @@
+
+%comment the line to allow break point with in function
 clear all
 clc
 
@@ -10,10 +12,17 @@ mass = 15000; %kilograms
 diameter = 4.5; %meters
 CD = .5;
 area = (pi*diameter^2)/4;
-%not sure what rho is.
-[a_delta] = maj_axis_change(r_apo, r_peri, mass, CD, area, 0.0);
+[a_delta, t_span, orbits] = maj_axis_change(r_apo, r_peri, mass, CD, area, 0.0);
+
+plot(t_span,a_delta)
+
+title('Semi Major Axis vs Time ')
+ylabel('semi_major_axis (meters)')
+xlabel('Time (s)')
+figure
 
 
+fprintf('The time to circularize is %.2f  years (%d orbits) \n', (t_span(end))/(3600*24*365), orbits)
 
 
 % Part 1-----------------------------------------------------------------------
@@ -47,5 +56,4 @@ title('Altitude vs Time')
 xlabel('Time (seconds)')
 ylabel('Altitude')
 ylim([0 360000]);
-fprintf('The time to decay is %.2f', tcrit/(3600*24*365))
-fprintf(' years \n')
+fprintf('The time to decay is %.2f years \n', tcrit/(3600*24*365))
