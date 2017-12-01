@@ -44,14 +44,14 @@ while h_inital ~= 175000 ;
 %     disp(semi_major_axis);
     t(end+1) = t(end)+half_period;
     dh_per = dhdt(half_period, h_inital);
-    perigee = apogee + dh_per;
+    perigee = perigee + dh_per;
     semi_major_axis = (perigee+apogee)/2;
     half_period = 0.5*(period(semi_major_axis));
     %completed one orbit pass
     t(end) = t(end)+half_period;
     h_inital = perigee-r_earth;
     dh_apo = dhdt(half_period, h_inital);
-    apogee = perigee + dh_apo;
+    apogee = apogee + dh_apo;
     
     semi_major_axis = (perigee+apogee)/2;
     a(end+1) = semi_major_axis;
