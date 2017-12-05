@@ -24,7 +24,7 @@ g = 9.81; %Gravity m/s^2
 mw = .02897; %Mean Molecular Weight
 t_avg = 257.5; %Average atmospheric temperature
 h_s = (R_u*t_avg)/(mw*g); %Scale Height
-ballistic_coe =150;
+ballistic_coe =M/(CD*A);
 dhdt = @(t,h)((-sqrt(mu*(h+r_earth))/ballistic_coe)*rho_0*exp(-h/h_s))*t;
 period = @(semi_major)2.*pi.*sqrt(semi_major.^3./mu);
 
