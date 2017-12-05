@@ -3,6 +3,9 @@ function [ a_delta, t_span,orbits] = maj_axis_change(r_apo, r_per, M, CD, A )
 %% constants 
 r_earth = 6378000;   % m
 mu = 3.986004418e14; % m^3/s^2
+G = 6.67408e-11;
+M_e = 5.9722e24;
+
 
 %difference between apogee and perigee to determine if oorbit is
 %circularized (meters)
@@ -15,12 +18,12 @@ cir_orbit_tolerance = 100;
 
 %% change in semi major axis 
 %a_delta = a_f-a_i;
+g = (G*M_e)/(((r_apo+r_per)/2)^2);
 
 
 
 rho_0  = 1.225; %kg.m^3; is the base density
 R_u = 8.314; %Universal gas constant
-g = 9.81; %Gravity m/s^2
 mw = .02897; %Mean Molecular Weight
 t_avg = 257.5; %Average atmospheric temperature
 h_s = (R_u*t_avg)/(mw*g); %Scale Height
