@@ -47,13 +47,23 @@ xlabel('Temperature (kelvin)')
 
 %% Part 3----------------------------------------------------------------------
 alt_circ = 185000; %initial circular height meters
-alt_crit = 120000; %critical alt given in class meters
+alt_crit = 0; %critical alt given in class meters
 delta_t = 36000; %Resolution for time step
-[t_step, tcrit, H_t] = circOrbitDecay(alt_circ,delta_t,alt_crit,mass,CD,area);
+mass = 1500; %kilograms
+diameter = 4.5; %meters
+area = (pi*diameter^2)/4;
+CD = 1;
+[t_step, tcrit, H_t, Q_tot,dq] = circOrbitDecay(alt_circ,alt_crit,mass,CD,area);
 figure
 plot(t_step,H_t)
 title('Altitude vs Time(Q3)')
 xlabel('Time (seconds)')
 ylabel('Altitude (meters)')
 ylim([0 360000]);
+figure
+plot(t_step,dq)
+title('Heat vs Time')
+xlabel('Time')
+ylabel('Heat (joules)')
 fprintf('3.) The time to decay is %.5f years (%d orbits)\n', tcrit/(3600*24*365))
+fprintf('3.) The total heat is %.2f joules', Q_tot)
